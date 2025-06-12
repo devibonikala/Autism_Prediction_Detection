@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Prediction System | Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/8653455/pexels-photo-8653455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            margin-bottom: 40px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #4fc3f7;
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4fc3f7;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .username {
+            color: #4fc3f7;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .logout-btn:hover {
+            background-color: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .prediction-btn {
+            background-color: #4fc3f7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .prediction-btn:hover {
+            background-color: #3da8d8;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.7);
+        }
+
+        .prediction-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .text-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .text-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #4fc3f7;
+        }
+
+        .text-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .video-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.8);
+                position: absolute;
+                top: 80px;
+                left: 0;
+                padding: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .text-content h1 {
+                font-size: 36px;
+            }
+
+            .text-content p {
+                font-size: 16px;
+            }
+
+            .logo-img {
+                height: 50px;
+                width: 50px;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .video-content {
+                width: 100%;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-header">
+            <div class="logo-container">
+                <img src="https://t4.ftcdn.net/jpg/11/97/83/17/360_F_1197831765_YfqwZhZnfXCAGcSN6I33Ot6EDFrKkdpb.jpg" alt="Autism Prediction Logo" class="logo-img">
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                
+                <li class="user-section">
+                    <span class="username">Welcome, {{ username }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('predict_page') }}" class="prediction-btn">
+                        <span class="prediction-icon">🔍</span>
+                        Autism Prediction
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="text-content">
+                <h1>Autism Spectrum Prediction</h1>
+                <p>Our advanced diagnostic tool uses behavioral analysis and AI to help identify potential signs of autism spectrum disorder, enabling early intervention and support. Early detection can significantly improve outcomes for children with ASD.</p>
+                <a href="{{ url_for('predict_page') }}" class="prediction-btn">
+                    <span class="prediction-icon">🔍</span>
+                    Start Prediction Now
+                </a>
+            </div>
+
+            <div class="video-content">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/TSm0LTQFvGc?si=08gnzRXnMZay-Jvk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

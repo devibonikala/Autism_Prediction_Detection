@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Spectrum Prediction Screening</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4fc3f7;
+            --primary-dark: #3da8d8;
+            --secondary: #ff9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .question-container {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary);
+        }
+
+        .question-container:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .options {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .option input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option input[type="radio"]:checked {
+            border-color: var(--primary);
+            background-color: var(--primary);
+        }
+
+        .option input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .option label {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .demographics {
+            margin-top: 40px;
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .demographics h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .demographics h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(79, 195, 247, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .options {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+
+        /* User info section */
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Navigation link */
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if username %}
+        <div class="user-info">Logged in as: {{ username }} | <a href="{{ url_for('logout') }}" class="nav-link">Logout</a></div>
+        {% endif %}
+
+        <header>
+            <h1>Autism Spectrum Prediction Screening</h1>
+            <p class="subtitle">Answer these questions to help identify potential signs of autism spectrum disorder</p>
+        </header>
+
+        <form action="{{ url_for('predict_page') }}" method="POST">
+            <div id="questions">
+                <!-- Question 1 -->
+                <div class="question-container">
+                    <div class="question">1. Does the child prefer playing alone rather than with other children?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A1_Score_1" name="A1_Score" value="1" required>
+                            <label for="A1_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A1_Score_0" name="A1_Score" value="0" checked>
+                            <label for="A1_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-container">
+                    <div class="question">2. Does the child avoid or struggle with making eye contact?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A2_Score_1" name="A2_Score" value="1" required>
+                            <label for="A2_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A2_Score_0" name="A2_Score" value="0" checked>
+                            <label for="A2_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-container">
+                    <div class="question">3. Does the child become upset by minor changes in routine or environment?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A3_Score_1" name="A3_Score" value="1" required>
+                            <label for="A3_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A3_Score_0" name="A3_Score" value="0" checked>
+                            <label for="A3_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-container">
+                    <div class="question">4. Does the child engage in repetitive behaviors (hand-flapping, rocking, spinning objects)?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A4_Score_1" name="A4_Score" value="1" required>
+                            <label for="A4_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A4_Score_0" name="A4_Score" value="0" checked>
+                            <label for="A4_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-container">
+                    <div class="question">5. Does the child show unusual reactions to sensory inputs (sounds, textures, lights, smells)?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A5_Score_1" name="A5_Score" value="1" required>
+                            <label for="A5_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A5_Score_0" name="A5_Score" value="0" checked>
+                            <label for="A5_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="question-container">
+                    <div class="question">6. Does the child have difficulty understanding or engaging in social interactions?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A6_Score_1" name="A6_Score" value="1" required>
+                            <label for="A6_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A6_Score_0" name="A6_Score" value="0" checked>
+                            <label for="A6_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question-container">
+                    <div class="question">7. Does the child find it challenging to recognize or understand others' emotions?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A7_Score_1" name="A7_Score" value="1" required>
+                            <label for="A7_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A7_Score_0" name="A7_Score" value="0" checked>
+                            <label for="A7_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question-container">
+                    <div class="question">8. Does the child repeat words or phrases (echolalia) or have unusual speech patterns?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A8_Score_1" name="A8_Score" value="1" required>
+                            <label for="A8_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A8_Score_0" name="A8_Score" value="0" checked>
+                            <label for="A8_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="question-container">
+                    <div class="question">9. Does the child develop intense, highly focused interests in specific topics?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A9_Score_1" name="A9_Score" value="1" required>
+                            <label for="A9_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A9_Score_0" name="A9_Score" value="0" checked>
+                            <label for="A9_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question-container">
+                    <div class="question">10. Does the child have difficulty using or understanding gestures, facial expressions, or tone of voice?</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" id="A10_Score_1" name="A10_Score" value="1" required>
+                            <label for="A10_Score_1">Yes</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" id="A10_Score_0" name="A10_Score" value="0" checked>
+                            <label for="A10_Score_0">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demographics">
+                <h2>Additional Information</h2>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age (years)</label>
+                        <input type="number" id="age" name="age" min="1" max="18" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender" required>
+                            <option value="1">Male</option>
+                            <option value="0">Female</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="ethnicity">Ethnicity</label>
+                        <select id="ethnicity" name="ethnicity" required>
+                            <option value="White-European">White-European</option>
+                            <option value="Latino">Latino</option>
+                            <option value="Asian">Asian</option>
+                            <option value="Black">Black</option>
+                            <option value="Middle Eastern">Middle Eastern</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="jaundice">Jaundice at birth</label>
+                        <select id="jaundice" name="jaundice" required>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="austim">Family history of autism</label>
+                        <select id="austim" name="austim" required>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contry_of_res">Country of Residence</label>
+                        <select id="contry_of_res" name="contry_of_res" required>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="India">India</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="used_app_before">Used screening app before</label>
+                        <select id="used_app_before" name="used_app_before" required>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="result">Previous screening score (0-10)</label>
+                        <input type="number" id="result" name="result" min="0" max="10" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="relation">Your relation to child</label>
+                    <select id="relation" name="relation" required>
+                        <option value="Parent">Parent</option>
+                        <option value="Relative">Relative</option>
+                        <option value="Self">Self</option>
+                        <option value="Health care professional">Health care professional</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" class="btn">Submit for Prediction</button>
+            </div>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('homepage') }}" class="nav-link">← Back to Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

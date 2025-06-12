@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Screening Tool</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4fc3f7;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        select, input[type="number"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+        }
+        .radio-option input {
+            margin-right: 8px;
+        }
+        .question {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        button {
+            background-color: #4fc3f7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3da8d8;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Autism Spectrum Screening</h1>
+        <form action="/predict" method="POST">
+            
+            <!-- Demographic Information -->
+            <div class="form-group">
+                <h2>Demographic Information</h2>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" min="1" max="120" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Gender:</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="male" name="gender" value="1" required>
+                            <label for="male">Male</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="female" name="gender" value="0">
+                            <label for="female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ethnicity">Ethnicity:</label>
+                    <select id="ethnicity" name="ethnicity" required>
+                        <option value="">Select Ethnicity</option>
+                        <option value="White-European">White-European</option>
+                        <option value="Latino">Latino</option>
+                        <option value="Asian">Asian</option>
+                        <option value="Black">Black</option>
+                        <option value="Middle Eastern">Middle Eastern</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contry_of_res">Country of Residence:</label>
+                    <input type="text" id="contry_of_res" name="contry_of_res" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Born with Jaundice?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="jaundice_yes" name="jaundice" value="1" required>
+                            <label for="jaundice_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="jaundice_no" name="jaundice" value="0">
+                            <label for="jaundice_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Family member with Autism?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="austim_yes" name="austim" value="1" required>
+                            <label for="austim_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="austim_no" name="austim" value="0">
+                            <label for="austim_no">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="relation">Who is completing this test?</label>
+                    <select id="relation" name="relation" required>
+                        <option value="">Select Relationship</option>
+                        <option value="Parent">Parent</option>
+                        <option value="Relative">Relative</option>
+                        <option value="Self">Self</option>
+                        <option value="Health care professional">Health care professional</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Used screening app before?</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="app_yes" name="used_app_before" value="1" required>
+                            <label for="app_yes">Yes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="app_no" name="used_app_before" value="0">
+                            <label for="app_no">No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- AQ-10 Questions -->
+            <div class="form-group">
+                <h2>Autism Quotient (AQ-10) Questions</h2>
+                <p>For each question, select the response that best describes the person:</p>
+                
+                <!-- Question 1 -->
+                <div class="question">
+                    <p>1. Does the person notice small sounds when others do not? (A1_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a1_1" name="A1_Score" value="1" required>
+                            <label for="a1_1">Definitely Agree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a1_0" name="A1_Score" value="0">
+                            <label for="a1_0">Slightly Agree/Disagree/Definitely Disagree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="question">
+                    <p>2. Does the person usually concentrate more on the whole picture, rather than the small details? (A2_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a2_1" name="A2_Score" value="1" required>
+                            <label for="a2_1">Definitely Agree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a2_0" name="A2_Score" value="0">
+                            <label for="a2_0">Slightly Agree/Disagree/Definitely Disagree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 3 -->
+                <div class="question">
+                    <p>3. Does the person find it easy to do more than one thing at once? (A3_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a3_1" name="A3_Score" value="1" required>
+                            <label for="a3_1">Definitely Disagree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a3_0" name="A3_Score" value="0">
+                            <label for="a3_0">Slightly Agree/Disagree/Definitely Agree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 4 -->
+                <div class="question">
+                    <p>4. If there is an interruption, can the person easily return to what they were doing before? (A4_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a4_1" name="A4_Score" value="1" required>
+                            <label for="a4_1">Definitely Disagree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a4_0" name="A4_Score" value="0">
+                            <label for="a4_0">Slightly Agree/Disagree/Definitely Agree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 5 -->
+                <div class="question">
+                    <p>5. Does the person find it easy to read between the lines when someone is talking to them? (A5_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a5_1" name="A5_Score" value="1" required>
+                            <label for="a5_1">Definitely Disagree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a5_0" name="A5_Score" value="0">
+                            <label for="a5_0">Slightly Agree/Disagree/Definitely Agree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 6 -->
+                <div class="question">
+                    <p>6. Does the person tend to notice details that others do not? (A6_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a6_1" name="A6_Score" value="1" required>
+                            <label for="a6_1">Definitely Agree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a6_0" name="A6_Score" value="0">
+                            <label for="a6_0">Slightly Agree/Disagree/Definitely Disagree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 7 -->
+                <div class="question">
+                    <p>7. Does the person tend to focus intensely on specific topics or activities? (A7_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a7_1" name="A7_Score" value="1" required>
+                            <label for="a7_1">Definitely Agree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a7_0" name="A7_Score" value="0">
+                            <label for="a7_0">Slightly Agree/Disagree/Definitely Disagree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 8 -->
+                <div class="question">
+                    <p>8. Does the person find it easy to work out what someone is thinking or feeling just by looking at their face? (A8_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a8_1" name="A8_Score" value="1" required>
+                            <label for="a8_1">Definitely Disagree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a8_0" name="A8_Score" value="0">
+                            <label for="a8_0">Slightly Agree/Disagree/Definitely Agree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 9 -->
+                <div class="question">
+                    <p>9. Does the person tend to notice patterns in things all the time? (A9_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a9_1" name="A9_Score" value="1" required>
+                            <label for="a9_1">Definitely Agree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a9_0" name="A9_Score" value="0">
+                            <label for="a9_0">Slightly Agree/Disagree/Definitely Disagree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 10 -->
+                <div class="question">
+                    <p>10. Does the person find it easy to work out people's intentions? (A10_Score)</p>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="a10_1" name="A10_Score" value="1" required>
+                            <label for="a10_1">Definitely Disagree</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="a10_0" name="A10_Score" value="0">
+                            <label for="a10_0">Slightly Agree/Disagree/Definitely Agree</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="result">Overall Screening Score (if available):</label>
+                    <input type="number" id="result" name="result" min="0" max="10">
+                </div>
+            </div>
+            
+            <button type="submit">Submit Screening</button>
+        </form>
+    </div>
+</body>
+</html>

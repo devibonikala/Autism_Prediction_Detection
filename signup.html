@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Autism Prediction System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://images.pexels.com/photos/8653455/pexels-photo-8653455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.205);
+            padding: 25px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.03);
+            box-shadow: 0px 6px 20px rgba(79, 195, 247, 0.5);
+        }
+        h2 {
+            color: #4fc3f7;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.7);
+            margin-bottom: 20px;
+            transition: all 0.5s ease;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @media (max-width: 768px) {
+            h2 {
+                color: #00ffaa;
+            }
+        }
+        @media (max-width: 480px) {
+            h2 {
+                color: #ff9f43;
+            }
+        }
+        
+        .input-container {
+            display: flex;
+            justify-content: center;
+        }
+        input {
+            width: 85%;
+            padding: 10px 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            border: 2px solid #ccc;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        input:focus {
+            outline: none;
+            border-color: #4fc3f7;
+            box-shadow: 0 0 8px rgba(79, 195, 247, 0.7);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+        }
+        button {
+            width: 85%;
+            padding: 10px;
+            margin: 15px 0 10px;
+            background-color: #4fc3f7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #3da8d8;
+            transform: scale(1.02);
+        }
+        
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 10px rgba(79, 195, 247, 0.7);
+            }
+            100% {
+                text-shadow: 0 0 20px rgba(79, 195, 247, 1);
+            }
+        }
+        
+        .message {
+            margin: 12px 0;
+            font-weight: bold;
+            min-height: 20px;
+            font-size: 14px;
+        }
+        .error {
+            color: #ff5555;
+        }
+        p {
+            color: white;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        a {
+            color: #4fc3f7;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if error %}
+        <div class="message error">{{ error }}</div>
+        {% endif %}
+        
+        <h2>Create Account</h2>
+        <form action="{{ url_for('signup') }}" method="POST">
+            <div class="input-container">
+                <input type="text" name="username" placeholder="Username" 
+                       value="{{ username if username else '' }}" autocomplete="username" required>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" placeholder="Password" autocomplete="new-password" required>
+            </div>
+            <div class="btn-container">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login', username=username if username else '') }}">Log in here</a></p>
+    </div>
+</body>
+</html>

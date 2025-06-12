@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Autism Spectrum Disorder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4fc3f7;
+            --primary-dark: #3da8d8;
+            --secondary: #ff9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: var(--dark);
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 30px 0 15px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        h3 {
+            color: var(--primary-dark);
+            margin: 25px 0 10px;
+            font-size: 1.4rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .card-highlight {
+            border-left: 5px solid var(--secondary);
+            background-color: #fff9e6;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .warning-box {
+            background-color: #fff3e0;
+            border-left: 5px solid var(--warning);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .image-card {
+            flex: 1;
+            min-width: 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            padding: 15px;
+            background: white;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Enhanced Back Button Styles */
+        .btn-back-container {
+            text-align: center;
+            margin: 40px 0;
+            padding: 0 15px;
+        }
+        
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--box-shadow);
+            gap: 10px;
+            width: 100%;
+            max-width: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(79, 195, 247, 0.35);
+        }
+        
+        .btn-back:hover::before {
+            left: 100%;
+        }
+        
+        .btn-back:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-back-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .btn-back:hover .btn-back-icon {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .image-container {
+                flex-direction: column;
+            }
+
+            .image-card {
+                min-width: 100%;
+            }
+
+            /* Responsive button adjustments */
+            .btn-back {
+                padding: 12px 24px;
+                font-size: 1rem;
+                max-width: 200px;
+            }
+            
+            .btn-back-icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .btn-back-container {
+                margin: 35px 0;
+            }
+            
+            .btn-back {
+                padding: 11px 20px;
+                font-size: 0.95rem;
+                max-width: 180px;
+                gap: 8px;
+            }
+            
+            .btn-back-icon {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>About Autism Spectrum Disorder</h1>
+        <p>Understanding neurodiversity and supporting individuals with ASD</p>
+    </header>
+
+    <div class="container">
+        <div class="image-container">
+            <div class="image-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLHuf2EQwA-98eVC1HuNrSyN4lkhKf0aEEog&s" alt="Autism awareness illustration">
+                <div class="image-caption">Understanding autism spectrum differences</div>
+            </div>
+            <div class="image-card">
+                <img src="https://cdn.cdnparenting.com/articles/2018/04/24173928/Autism-in-Children.webp" alt="Neurodiversity concept">
+                <div class="image-caption">Celebrating neurodiversity in our communities</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>What is Autism?</h2>
+            <p>Autism Spectrum Disorder (ASD) is a complex neurodevelopmental condition that affects how a person communicates, interacts with others, and experiences the world around them. ASD is called a "spectrum" disorder because it encompasses a wide range of symptoms and levels of ability.</p>
+            
+            <p>Autism is not an illness or disease that needs to be cured. It's a different way of experiencing and interacting with the world that comes with both challenges and strengths.</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="stat-number">1 in 54</div>
+                <div class="stat-label">Children in the U.S. are diagnosed with ASD</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4x</div>
+                <div class="stat-label">More common in boys than girls</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2-5</div>
+                <div class="stat-label">Average age of diagnosis in years</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Core Characteristics</h2>
+            <p>While autism presents differently in every individual, there are two main areas of difference:</p>
+            
+            <h3>1. Social Communication Challenges</h3>
+            <ul>
+                <li>Difficulty with verbal and nonverbal communication</li>
+                <li>Challenges understanding social cues and norms</li>
+                <li>Differences in developing and maintaining relationships</li>
+                <li>Varied eye contact (may avoid or stare intensely)</li>
+            </ul>
+            
+            <h3>2. Restricted, Repetitive Behaviors</h3>
+            <ul>
+                <li>Repetitive movements or speech patterns</li>
+                <li>Intense, highly focused interests</li>
+                <li>Need for routine and difficulty with change</li>
+                <li>Sensory sensitivities (over- or under-sensitivity)</li>
+            </ul>
+        </div>
+
+        <div class="card card-highlight">
+            <h2>Strengths Associated with Autism</h2>
+            <p>While autism comes with challenges, many individuals with ASD also demonstrate remarkable strengths:</p>
+            
+            <ul>
+                <li><strong>Attention to detail</strong> - Many notice patterns and details others miss</li>
+                <li><strong>Deep focus</strong> - Ability to concentrate intensely on areas of interest</li>
+                <li><strong>Logical thinking</strong> - Strong analytical and problem-solving skills</li>
+                <li><strong>Honesty and loyalty</strong> - Often value truth and consistency</li>
+                <li><strong>Unique perspectives</strong> - Different ways of seeing the world can lead to innovation</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Early Signs in Children</h2>
+            <p>Signs of autism typically appear by age 2-3, though some signs may be noticeable earlier:</p>
+            
+            <h3>Social Communication Signs</h3>
+            <ul>
+                <li>Limited or no eye contact by 6 months</li>
+                <li>No babbling by 12 months or words by 16 months</li>
+                <li>Doesn't respond to name by 12 months</li>
+                <li>Doesn't point to show interest by 14 months</li>
+                <li>Little interest in other children</li>
+            </ul>
+            
+            <h3>Behavioral Signs</h3>
+            <ul>
+                <li>Lines up toys or plays with them the same way repeatedly</li>
+                <li>Very focused on parts of objects (e.g., wheels on cars)</li>
+                <li>Unusual reactions to sounds, smells, tastes, or textures</li>
+                <li>Repetitive movements like hand-flapping or rocking</li>
+            </ul>
+        </div>
+
+        <div class="warning-box">
+            <h3>Important Note</h3>
+            <p>If you notice several of these signs in your child, it doesn't necessarily mean they have autism, but it does suggest you should consult with a pediatrician or developmental specialist. Early intervention can make a significant difference in helping children develop skills and reach their full potential.</p>
+        </div>
+
+        <div class="card">
+            <h2>Diagnosis and Support</h2>
+            <p>There is no medical test for autism - diagnosis is based on observation of behavior and development. A comprehensive evaluation typically involves:</p>
+            
+            <ul>
+                <li>Developmental screening during pediatric checkups</li>
+                <li>Comprehensive diagnostic evaluation by specialists</li>
+                <li>Assessment of communication, behavior, and development</li>
+                <li>Input from parents, teachers, and other caregivers</li>
+            </ul>
+            
+            <h3>Support Strategies</h3>
+            <p>While there's no "cure" for autism, many interventions can help individuals develop skills and thrive:</p>
+            
+            <ul>
+                <li><strong>Behavioral therapies</strong> (e.g., ABA, CBT)</li>
+                <li><strong>Speech and language therapy</strong></li>
+                <li><strong>Occupational therapy</strong> for sensory and motor skills</li>
+                <li><strong>Social skills training</strong></li>
+                <li><strong>Educational support</strong> through IEPs and specialized programs</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Understanding Neurodiversity</h2>
+            <p>The neurodiversity movement views autism as a natural variation in human neurology rather than a disorder that needs to be fixed. This perspective emphasizes:</p>
+            
+            <ul>
+                <li>Acceptance and accommodation rather than just treatment</li>
+                <li>Recognizing the strengths that come with neurological differences</li>
+                <li>Supporting individuals in ways that respect their autonomy</li>
+                <li>Creating inclusive environments that work for diverse minds</li>
+            </ul>
+            
+            <p>Many autistic adults advocate for this approach, emphasizing that while support is important, the goal should be acceptance and accommodation rather than making autistic people appear "normal."</p>
+        </div>
+
+        <!-- Enhanced Back to Home Button -->
+        <div class="btn-back-container">
+            <a href="{{ url_for('homepage') }}" class="btn-back">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" class="btn-back-icon">
+                    <path fill-rule="evenodd" d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>

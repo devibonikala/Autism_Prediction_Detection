@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screening Result | Autism Prediction System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .result-container {
+            background: white;
+            width: 90%;
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        h1 {
+            color: #4fc3f7;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .result-box {
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .autistic {
+            background-color: #ffebee;
+            border-left: 5px solid #f44336;
+        }
+        .not-autistic {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+        .result-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .confidence {
+            font-size: 18px;
+            color: #555;
+        }
+        .info {
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        .features {
+            margin-top: 30px;
+        }
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .feature-table th, .feature-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .feature-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .feature-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .btn {
+            background-color: #4fc3f7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #3da8d8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        {% if username %}
+        <div class="user-info">Logged in as: {{ username }}</div>
+        {% endif %}
+        
+        <h1>Screening Result</h1>
+        
+        <div class="result-box {% if prediction == 'Autistic' %}autistic{% else %}not-autistic{% endif %}">
+            <div class="result-text">Prediction: {{ prediction }}</div>
+            <div class="confidence">Confidence Level: {{ confidence }}</div>
+        </div>
+        
+        <div class="info">
+            {% if prediction == 'Autistic' %}
+                <h3>Interpretation:</h3>
+                <p>This screening suggests characteristics associated with Autism Spectrum Disorder (ASD).</p>
+                <p><strong>Recommendation:</strong> This result indicates the need for further evaluation by a qualified healthcare professional specializing in autism diagnosis.</p>
+            {% else %}
+                <h3>Interpretation:</h3>
+                <p>This screening suggests limited characteristics associated with Autism Spectrum Disorder.</p>
+                <p><strong>Recommendation:</strong> If you have ongoing concerns, consider consulting with a healthcare professional for further assessment.</p>
+            {% endif %}
+        </div>
+        
+        <div class="features">
+            <h3>Assessment Details:</h3>
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Question/Feature</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key, value in features.items() %}
+                    <tr>
+                        <td>{{ key.replace('_', ' ') | title }}</td>
+                        <td>
+                            {% if value is number %}
+                                {{ 'Yes' if value == 1 else 'No' }}
+                            {% else %}
+                                {{ value }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="btn-container">
+            <a href="{{ url_for('predict_page') }}" class="btn">New Screening</a>
+            <a href="{{ url_for('homepage') }}" class="btn btn-secondary">Return to Dashboard</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-secondary">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

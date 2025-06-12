@@ -1,0 +1,38 @@
+/* Background Styling */
+body {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    font-family: Arial, sans-serif;
+    color: blue;
+}
+
+/* Form Container */
+.container {
+    max-width: 700px;
+}
+
+/* Form Header */
+h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Form Styling */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Label Styling */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Button Styling */
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
